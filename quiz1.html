@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>array</title>
+</head>
+<body>
+	
+</body>
+<script>
+// Q1. make a string out of an array
+{
+	const fruits = ['apple', 'banana', 'orange'];
+//	for(let i = 0; i<fruits.length; i++){
+//		console.log(fruits[i]);
+//	}
+//	for(anything of fruits){
+//		console.log(anything);
+//	}
+	let test = fruits.join(); //join(구분자?:string) 구분자를 넣어 문자열로 리턴
+	console.log(test);
+}
+
+// Q2. make an array out of a string (only three)
+{
+	const fruits = '🍎, 🥝, 🍌, 🍒';
+//	let arr = [];
+//	arr.push(fruits);
+//	console.log(arr);
+	const test = fruits.split(',',3); //split(구분자:string,limit?:num)
+	console.log(test);
+}
+
+// Q3. make this array look like this: [5, 4, 3, 2, 1]
+{
+	const array = [1, 2, 3, 4, 5];
+	array.reverse(); //reverse 배열 자체의 정렬을 바꿈
+	console.log(array);
+}
+
+// Q4. make new array without the first two elements
+{
+	const array = [1, 2, 3, 4, 5];
+	const test = array.slice(2,5); //slice((start:num, end:num(이 숫자는 배제됨))배열의 특정 부분을 리턴
+	console.log(test);
+	//splice(지울 요소의 인덱스, 그 인텍스로부터 몇개 지울건지)
+	//splice(1,1,이걸로 바꾸기) 지운 자리에 뭐 넣을지
+	//**splice vs slice
+	//splice: 해당 배열을 변경함 (원래 배열을 수정)
+	//slice: 원래 배열은 그대로 두고 원하는 부분만 리턴 (새로운 배열 생성)
+}
+
+class Student {
+  constructor(name, age, enrolled, score) {
+    this.name = name;
+    this.age = age;
+    this.enrolled = enrolled;
+    this.score = score;
+  }
+}
+const students = [
+  new Student('A', 29, true, 45),
+  new Student('B', 28, false, 80),
+  new Student('C', 30, true, 90),
+  new Student('D', 40, false, 66),
+  new Student('E', 18, true, 88),
+];
+
+// Q5. find a student with the score 90
+{
+	const test = students.find((student) => student.score == 90); //find(콜백함수) true 인 첫번째 값을 리턴하고 함수를 멈춤
+	console.log(test);
+}
+
+// Q6. make an array of enrolled students
+{
+	const test = students.filter((student)=>student.enrolled)//filter(콜백함수) true인 값들을 리턴하고 함수를 멈춤
+	console.log(test);
+}
+
+// Q7. make an array containing only the students' scores
+// result should be: [45, 80, 90, 66, 88]
+{
+//	let arr = [];
+//	for(val of students){
+//		const score = val.score;
+//		arr.push(score);
+//	}
+	
+	const test = students.map((student)=>student.score*2);//map(콜백함수) 배열 안의 요소를 함수를 이용해 원하는 값으로 만들 때
+	console.log(test);
+	
+}
+
+// Q8. check if there is a student with the score lower than 50
+{
+	const test = students.some((student)=>student.score<50); //some(콜백함수) 50보다 낮은 스코어가 하나라도 있으면 true
+	const test2 = students.every((student)=>student.score<50); //some(콜백함수) 모든 스코어가 50보다 낮으면 true
+	console.log(test); //true
+	console.log(test2); //false
+}
+
+// Q9. compute students' average score
+{
+	const test = students.reduce((prev,curr)=>{
+		console.log('---');						 
+		console.log(prev);					 
+		console.log(curr);	
+		return prev+curr.score; // 리턴할 때 이 값이 파라미터의 prev로 전달됨
+	},0)//reduce(콜백함수, initial value) 함수를 리턴할 때 그 값을 누적해 파라미터로 전달함, 배열 하나하나를 돌면서 값을 누적
+	console.log(test/students.length);//73.8
+}
+
+// Q10. make a string containing all the scores
+// result should be: '45, 80, 90, 66, 88'
+{
+	const test = students.map((student)=>student.score).filter((score)=>score>50).join(); //50이상만
+	console.log(test);
+}
+
+// Bonus! do Q10 sorted in ascending order
+// result should be: '45, 66, 80, 88, 90'
+{
+	const test = students.map((student)=>student.score).sort((a,b)=>a-b).join();
+	console.log(test);
+}
+
+</script>
+</html>
